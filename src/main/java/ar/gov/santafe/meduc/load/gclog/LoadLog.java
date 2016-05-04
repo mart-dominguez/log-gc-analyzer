@@ -33,20 +33,20 @@ public class LoadLog {
     
     public static void main(String[] args){        
         try {
-            /* LinkedHashSet<Reporte> reportes = new LinkedHashSet<Reporte>();
-            Integer inicio = 20160422;
+            LinkedHashSet<Reporte> reportes = new LinkedHashSet<Reporte>();
+            Integer inicio = 20160501;
             Integer horaInicio = 6;
             //avanzo por dia
-            for(int i=inicio;i<20160429;i++){
-            //avanzo por hora
-            for(int h=horaInicio;h<20;h++){
-            Reporte rAux = getReporte(i, h);
-            System.out.print(rAux);
-            reportes.add(rAux);
+            for(int i=inicio;i<20160504;i++){
+                //avanzo por hora
+                for(int h=horaInicio;h<20;h++){
+                    Reporte rAux = getReporte(i, h);
+                    System.out.print(rAux);
+                    reportes.add(rAux);
+                }
             }
-            }
-            System.out.print(reportes);*/
-            Key key = new AesKey(ByteUtil.randomBytes(16));
+            System.out.print(reportes);
+            /*Key key = new AesKey(ByteUtil.randomBytes(16));
             JsonWebEncryption jwe = new JsonWebEncryption();
             jwe.setPayload("Hello World!");
             jwe.setAlgorithmHeaderValue(KeyManagementAlgorithmIdentifiers.A128KW);
@@ -59,6 +59,9 @@ public class LoadLog {
             jwe.setCompactSerialization(serializedJwe);
             System.out.println("Payload: " + jwe.getPayload());
         } catch (JoseException ex) {
+            Logger.getLogger(LoadLog.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+        } catch (Exception ex) {
             Logger.getLogger(LoadLog.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -86,17 +89,17 @@ public class LoadLog {
             double tiempoYoung = 0.0;
             double tiempoOld = 0.0;
             for(String[] cicloGc : elementos){
-                //System.out.println(cicloGc[1]+Arrays.toString(cicloGc)+ " *** " +cicloGc[cicloGc.length-2]);
+                  //System.out.println(cicloGc[0]+"==== "+cicloGc[1]+Arrays.toString(cicloGc)+ " *** " +cicloGc[cicloGc.length-2]);
 //                System.out.println(cicloGc[1]+" es.."+cicloGc[1].trim().equalsIgnoreCase("[GC"));                
                 try{
                     if(cicloGc[1].trim().equalsIgnoreCase("[GC")){
       //                  System.out.println(cicloGc[cicloGc.length-2]+ "****"+Arrays.toString(cicloGc));
                         tiempoYoung += Double.valueOf(cicloGc[cicloGc.length-2]);
-                        r.addYoung(Double.valueOf(cicloGc[cicloGc.length-2]));
+                        r.addYoung(Double.valueOf(cicloGc[cicloGc.length-2]),cicloGc[0]);
                     }else{
                         if(cicloGc[1].trim().equalsIgnoreCase("[Full")){
                             tiempoOld += Double.valueOf(cicloGc[cicloGc.length-2]) ;                   
-                            r.addOld(Double.valueOf(cicloGc[cicloGc.length-2]));
+                            r.addOld(Double.valueOf(cicloGc[cicloGc.length-2]),cicloGc[0]);
                         }
                     }
                 }catch(Exception e){
