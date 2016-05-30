@@ -4,14 +4,7 @@
     <groupId>ar.gov.santafe.meduc</groupId>
     <artifactId>load-gclog</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
-    <dependencies>
-        <dependency>
-            <groupId>org.bitbucket.b_c</groupId>
-            <artifactId>jose4j</artifactId>
-            <version>0.5.0</version>
-        </dependency>
-    </dependencies>
+    <packaging>jar</packaging>  
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>

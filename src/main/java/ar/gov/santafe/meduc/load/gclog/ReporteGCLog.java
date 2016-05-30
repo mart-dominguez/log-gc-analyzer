@@ -11,7 +11,7 @@ import java.util.LinkedHashSet;
  *
  * @author mdominguez
  */
-public class Reporte {
+public class ReporteGCLog {
     private Integer dia;
     private Integer hora;
     private Double young;
@@ -20,7 +20,7 @@ public class Reporte {
     private Integer cantidadOld;
     private String ultimaHora;
     private LinkedHashSet<String> horas;
-    public Reporte(Integer dia,Integer hora){
+    public ReporteGCLog(Integer dia,Integer hora){
         horas=new LinkedHashSet<String>();
         this.dia=dia;
         this.hora=hora;
@@ -60,8 +60,7 @@ public class Reporte {
     
     public String getArchivoPath(){
         //return "/home/mdominguez/desarrollos/tutoriales/ind/log2/"+this.dia+"/ge.gc-date_"+this.getClave()+".log";   
-        //return "e:/srv/gclogs/ge.gc-date_"+this.getClave()+".log";   
-        return "/home/mdominguez/desarrollos/tutoriales/ind/monitorsantafe/ge.gc-date_"+this.getClave()+".log";
+        return "e:/srv/gclogs/ge.gc-date_"+this.getClave()+".log";   
     }
     
     public String toString(){

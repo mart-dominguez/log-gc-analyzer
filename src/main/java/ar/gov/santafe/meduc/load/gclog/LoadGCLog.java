@@ -7,7 +7,6 @@ package ar.gov.santafe.meduc.load.gclog;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -17,33 +16,38 @@ import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 /**
  *
  * @author mdominguez
  */
-public class LoadLog {
-    private static String directorio = "/home/mdominguez/desarrollos/tutoriales/ind/monitorsantafe/20160422/";
+public class LoadGCLog {
+    private static String directorio = "/home/mdominguez/desarrollos/tutoriales/ind/log2/20160422/";
     private static String archivo = "ge.gc-date_2016042206.log";
     
     public static void main(String[] args){        
         try {
-            String x ="mdominguez-098f6bcd4621d373cade4e832627b4f6";
-            System.out.println(Arrays.toString(x.split("\\|")));
-            String string = "004-034556";
-            String[] parts = string.split("-");
-            String part1 = parts[0]; // 004
-            String part2 = parts[1]; // 034556
-            System.out.println(Arrays.toString(parts));
-            System.out.println(part1);
-            System.out.println(part2);                 
+            LinkedHashSet<ReporteGCLog> reportes = new LinkedHashSet<ReporteGCLog>();
+            Integer inicio = 20160501;
+            Integer horaInicio = 6;
+            //avanzo por dia
+            for(int i=inicio;i<20160504;i++){
+                //avanzo por hora
+                for(int h=horaInicio;h<20;h++){
+                    ReporteGCLog rAux = getReporte(i, h);
+                    System.out.print(rAux);
+                    reportes.add(rAux);
+                }
+            }
+            System.out.print(reportes);
         } catch (Exception ex) {
             Logger.getLogger(LoadLog.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public static Reporte getReporte(Integer dia,Integer hora){
+    public static ReporteGCLog getReporte(Integer dia,Integer hora){
         ArrayList<String[]> elementos = new ArrayList<String[]>();
-        Reporte r = new Reporte(dia, hora);
+        ReporteGCLog r = new ReporteGCLog(dia, hora);
         System.out.println(r.getArchivoPath());
         try {
             Scanner scnr = new Scanner(new File(r.getArchivoPath()));
